@@ -84,8 +84,11 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+# config/database.yml
+
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV["DATABASE_URL"] %>
+  primary:
+    url: <%= ENV["DATABASE_URL"] %>
+  cable:
+    url: <%= ENV["DATABASE_URL"] %>
+    migrations_paths: db/cable_migrate
