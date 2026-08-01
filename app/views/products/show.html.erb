@@ -1,0 +1,15 @@
+<h1><%= @product.title %></h1>
+<p>価格: <%= number_to_currency(@product.price, unit: "円", precision: 0) %></p>
+
+<div>
+  <h3>添付PDFファイル</h3>
+  <% if @product.pdf_file.attached? %>
+    <%= link_to @product.pdf_file.filename.to_s, rails_blob_path(@product.pdf_file, disposition: "inline"), target: "_blank" %>
+  <% else %>
+    <p>PDFファイルはありません。</p>
+  <% end %>
+</div>
+
+<hr>
+<%= link_to "編集", edit_product_path(@product) %> |
+<%= link_to "一覧に戻る", products_path %>

@@ -1,0 +1,31 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= product.errors.count %>件のエラーが発生しました:</h2>
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, "商品名" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :price, "価格" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :pdf_file, "PDFファイル" %>
+    <%= form.file_field :pdf_file, accept: "application/pdf" %>
+  </div>
+
+  <div>
+    <%= form.submit "保存する" %>
+  </div>
+<% end %>
