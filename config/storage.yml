@@ -15,5 +15,5 @@ cloudflare_r2:
   bucket: <%= ENV["R2_BUCKET_NAME"] %>
   endpoint: <%= ENV["R2_ENDPOINT"] %>
   force_path_style: true
-  upload_options:
-    checksum_algorithm: "nil"
+  upload:
+    checksum_algorithm: "nil" # Cloudflare R2では、アップロード時にチェックサムを計算しないようにするためにnilを指定
