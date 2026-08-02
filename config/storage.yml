@@ -16,4 +16,4 @@ cloudflare_r2:
   endpoint: <%= ENV["R2_ENDPOINT"] %>
   force_path_style: true
   upload_options:
-    checksum_algorithm: "CRC32"
+    checksum_algorithm: "nil"
