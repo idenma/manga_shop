@@ -9,6 +9,7 @@
     <%= render product %>
     <p>
       <%= link_to "Show this product", product %>
+      <%= button_to "削除", product, method: :delete, data: { turbo_confirm: "この商品を削除しますか？" } %>
     </p>
   <% end %>
 </div>
