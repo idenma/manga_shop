@@ -24,11 +24,14 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :cloudflare_r2
 
+  # Active Storage の署名 URL は短めに設定
+  config.active_storage.urls_expire_in = 1.day
+
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # SSL（https）を強制する（Stripeの決済やRenderの運営に必須です） 
+  # SSL（https）を強制する（Stripeの決済やRenderの運営に必須です）
   config.force_ssl = true
 
   # Skip http-to-https redirect for the default health check endpoint.

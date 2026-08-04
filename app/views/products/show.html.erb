@@ -4,7 +4,9 @@
 <div>
   <h3>添付PDFファイル</h3>
   <% if @product.pdf_file.attached? %>
-    <%= link_to @product.pdf_file.filename.to_s, rails_blob_path(@product.pdf_file, disposition: "attachment") %>
+    <%= link_to "PDFをダウンロード",
+      rails_blob_url(@product.pdf_file, disposition: :attachment),
+      target: "_blank", rel: "noopener" %>
   <% else %>
     <p>PDFファイルはありません。</p>
   <% end %>
