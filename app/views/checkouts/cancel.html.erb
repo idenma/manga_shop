@@ -1,0 +1,10 @@
+<h1>決済をキャンセルしました</h1>
+<p>決済は完了していません。内容をご確認のうえ、再度お試しください。</p>
+
+<p>
+  <% if @product.present? %>
+    <%= link_to "商品詳細に戻る", product_path(@product) %>
+  <% else %>
+    <%= link_to "商品一覧に戻る", products_path %>
+  <% end %>
+</p>

@@ -1,6 +1,10 @@
 <h1><%= @product.title %></h1>
 <p>価格: <%= number_to_currency(@product.price, unit: "円", precision: 0) %></p>
 
+<p>
+  <%= button_to "購入する", checkout_product_path(@product), method: :post, data: { turbo: false } %>
+</p>
+
 <div>
   <h3>添付PDFファイル</h3>
   <% if @product.pdf_file.attached? %>

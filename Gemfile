@@ -28,7 +28,7 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
-#Cloudflare R2 
+# Cloudflare R2
 gem "aws-sdk-s3", require: false
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -42,6 +42,8 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
+
+gem "stripe"
 
 group :development, :test do
   gem "sqlite3"
@@ -72,4 +74,3 @@ end
 group :production do
   gem "pg", "~> 1.1"
 end
-
