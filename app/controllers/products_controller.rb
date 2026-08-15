@@ -1,6 +1,6 @@
 # app/controllers/products_controller.rb
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy download ]
 
   def index
     @products = Product.all
@@ -37,6 +37,16 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to products_url, notice: "商品を削除しました。"
+  end
+
+  def download
+    token = params[:purchase_token]
+    purchase = Purchase.find_signed(token, purpose: "purchase_download") if token.present?
+
+    return head :forbidden unless purchase&.product_id == @product.id
+    return head :not_found unless @product.pdf_file.attached?
+
+    redirect_to rails_blob_path(@product.pdf_file, disposition: :attachment)
   end
 
   private

@@ -29,6 +29,11 @@ class CheckoutsController < ApplicationController
   end
 
   def success
+    @purchase = Purchase.find_by(stripe_session_id: params[:session_id])
+    return if @purchase.blank?
+
+    @product = @purchase.product
+    @download_token = @purchase.download_token
   end
 
   def cancel

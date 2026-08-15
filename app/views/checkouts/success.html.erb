@@ -1,6 +1,16 @@
 <h1>決済が完了しました</h1>
 <p>ご購入ありがとうございます。</p>
 
+<% if @purchase.present? && @product.present? %>
+  <p>
+    <%= link_to "購入したPDFをダウンロード",
+      download_product_path(@product, purchase_token: @download_token) %>
+  </p>
+  <p>このダウンロードリンクは24時間有効です。</p>
+<% else %>
+  <p>購入情報を確認中です。数秒後に再読み込みしてください。</p>
+<% end %>
+
 <p>
   <%= link_to "商品一覧に戻る", products_path %>
 </p>

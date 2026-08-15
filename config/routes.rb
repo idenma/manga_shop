@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :products do
     post :checkout, to: "checkouts#create", on: :member
+    get :download, on: :member
   end
 
   get "checkout/success", to: "checkouts#success", as: :checkout_success

@@ -1,4 +1,5 @@
 require "test_helper"
+require "stringio"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -44,5 +45,30 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to products_url
+  end
+
+  test "should forbid download without purchase token" do
+    get download_product_url(@product)
+    assert_response :forbidden
+  end
+
+  test "should allow download with valid purchase token" do
+    @product.pdf_file.attach(
+      io: StringIO.new("%PDF-1.4 test"),
+      filename: "sample.pdf",
+      content_type: "application/pdf"
+    )
+
+    purchase = Purchase.create!(
+      product: @product,
+      stripe_session_id: "cs_test_download_1",
+      customer_email: "buyer@example.com",
+      amount_total: @product.price,
+      currency: "jpy",
+      paid_at: Time.current
+    )
+
+    get download_product_url(@product, purchase_token: purchase.download_token)
+    assert_response :redirect
   end
 end
